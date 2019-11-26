@@ -1,0 +1,180 @@
+import User from '../models/User';
+const bcrypt = require('bcryptjs');
+import Credential from '../models/Credential';
+
+export async function getUsers(req, res) {
+    try {
+        const users = await User.findAll({
+            where:{
+                status: true
+            }
+        });
+        res.json({
+            data: users
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Something goes wrong",
+            error
+        })
+    }
+}
+
+export async function createUser(req, res) {
+
+    const { ci, name, lastname, dateofbirth, role, email, password } = req.body;
+    try {
+
+        let emailFound = await Credential.findOne({
+            where: {
+                email
+            }
+        });
+        if (emailFound) {
+            return res.status(400).json({
+                "message": "Something goes wrong",
+                "data": "Ya existe la llave (email) = " + email
+            })
+        }
+
+        let newUser = await User.create({
+            ci,
+            name,
+            lastname,
+            dateofbirth,
+            role
+        }, {
+                fields: ['ci', 'name', 'lastname', 'dateofbirth', 'role']
+            })
+
+        let newCredential = await Credential.create({
+            email,
+            password: String(bcrypt.hashSync(password, 10)),                    // traer metodo desde controller o dejarlo aqui?
+            userid: ci
+        }, {
+                fields: ['email', 'password', 'userid']
+            });
+
+        if (newUser) {
+            return res.json({
+                message: "User created successfully",
+                data: { newUser, newCredential }
+            })
+        }
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: 'Something goes wrong',
+            error
+        })
+    }
+}
+
+export async function getOneUser(req, res) {
+
+    const { ci } = req.params;
+
+    try {
+        const user = await User.findOne({
+            where: {
+                ci , 
+                status: true
+            }
+        });
+        if (!user) {
+            return res.status(400).json({
+                message: "User with ci: " + ci + " does not exist.",
+            })
+        }
+        res.json({
+            message: "User gotten successfully ",
+            data: user
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Something goes wrong",
+            error
+        })
+    }
+}
+
+export async function deleteUser(req, res) {
+
+    const { ci } = req.params;
+
+    try {
+        const deleteRowCount = await User.update({
+            status : false
+        },{
+            where: {
+                ci,
+                status: true
+            }
+        });
+        if (deleteRowCount === 0) {
+            return res.status(400).json({
+                message: "Can't be deleted because the CI: " + ci + " does not exist",
+                data: "Deleted rows " + deleteRowCount
+            })
+        }
+        res.json({
+            message: "User deleted successfully",
+            data: "Deleted rows" + deleteRowCount
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: 'Something goes wrong',
+            data: error
+        })
+    }
+}
+
+export async function updateUser(req, res) {
+
+    const { ci } = req.params;
+    const { name, lastname, dateofbirth, role } = req.body                  //Que el usuario pueda modificar su email y su rol ?
+
+    // const userFound = await User.findOne({
+    //     atributes: ["name", "lastname", "dateofbirth", "role"],
+    //     where:{
+    //         ci
+    //     }
+    // });
+    // if(!userFound){
+    //     return res.status(400).json({
+    //         message: "usuario con ci:"+ ci+"no existe"
+    //     })
+    // }
+
+    try {
+        const updateRowCount = await User.update({
+            name,
+            lastname,
+            dateofbirth,
+            role
+        }, {
+                where: {
+                    ci,
+                    status: true
+                }
+            });
+        if (updateRowCount == 0) {
+            return res.status(400).json({
+                message: "Can't be updated because the CI: " + ci + " does not exist",
+                data: "Updated rows " + updateRowCount
+            })
+        }
+        return res.json({
+            message: "User updated successfully",
+            data: "Updated rows " + updateRowCount
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: 'Something goes wrong',
+            data: error
+        })
+    }
+}
