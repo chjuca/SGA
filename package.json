@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/index.js --exec babel-node",
     "build": "babel src --out-dir dist",
-    "start": "node src/index.js"
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +28,6 @@
     "@babel/node": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
     "babel-node": "0.0.1-security",
-    "babel-plugin-transform-runtime": "^6.23.0",
     "nodemon": "^1.19.4"
   }
 }
