@@ -10,7 +10,7 @@ const dbconfig = {
         requiere: 30000,
         idle: 10000
     },
-    logging: false
+    logging: true
 }; 
 
 const url = process.env.URL;

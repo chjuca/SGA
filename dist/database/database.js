@@ -20,7 +20,7 @@ var dbconfig = {
     requiere: 30000,
     idle: 10000
   },
-  logging: false
+  logging: true
 };
 var url = process.env.URL;
 var sequelize = new _sequelize["default"](url);
