@@ -1,5 +1,5 @@
-require('./config/config');
 import app from './app';
+require('./config/config');
 
 
 function main(){
