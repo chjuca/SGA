@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -9,21 +11,21 @@ exports.getOneCredetential = getOneCredetential;
 exports.deleteCredential = deleteCredential;
 exports.updateCredential = updateCredential;
 
-var _Credential = _interopRequireDefault(require("../models/Credential"));
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var _Credential = _interopRequireDefault(require("../models/Credential"));
 
 var bcrypt = require('bcryptjs');
 
 function getCredentials(req, res) {
   var credentials;
-  return regeneratorRuntime.async(function getCredentials$(_context) {
+  return _regenerator["default"].async(function getCredentials$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
           _context.next = 3;
-          return regeneratorRuntime.awrap(_Credential["default"].findAll());
+          return _regenerator["default"].awrap(_Credential["default"].findAll());
 
         case 3:
           credentials = _context.sent;
@@ -52,14 +54,14 @@ function getCredentials(req, res) {
 function createCredential(req, res) {
   var _req$body, email, password, ci, emailFound, newCredential;
 
-  return regeneratorRuntime.async(function createCredential$(_context2) {
+  return _regenerator["default"].async(function createCredential$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _req$body = req.body, email = _req$body.email, password = _req$body.password, ci = _req$body.ci;
           _context2.prev = 1;
           _context2.next = 4;
-          return regeneratorRuntime.awrap(_Credential["default"].findOne({
+          return _regenerator["default"].awrap(_Credential["default"].findOne({
             //agregar que la userid validacion
             where: {
               email: email
@@ -80,7 +82,7 @@ function createCredential(req, res) {
 
         case 7:
           _context2.next = 9;
-          return regeneratorRuntime.awrap(_Credential["default"].create({
+          return _regenerator["default"].awrap(_Credential["default"].create({
             email: email,
             password: String(bcrypt.hashSync(password, 10)),
             userid: ci
@@ -124,14 +126,14 @@ function createCredential(req, res) {
 
 function getOneCredetential(req, res) {
   var ci, credential;
-  return regeneratorRuntime.async(function getOneCredetential$(_context3) {
+  return _regenerator["default"].async(function getOneCredetential$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           ci = req.params.ci;
           _context3.prev = 1;
           _context3.next = 4;
-          return regeneratorRuntime.awrap(_Credential["default"].findOne({
+          return _regenerator["default"].awrap(_Credential["default"].findOne({
             where: {
               userid: ci
             }
@@ -175,14 +177,14 @@ function getOneCredetential(req, res) {
 
 function deleteCredential(req, res) {
   var ci, deleteRowCount;
-  return regeneratorRuntime.async(function deleteCredential$(_context4) {
+  return _regenerator["default"].async(function deleteCredential$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           ci = req.params.ci;
           _context4.prev = 1;
           _context4.next = 4;
-          return regeneratorRuntime.awrap(_Credential["default"].destroy({
+          return _regenerator["default"].awrap(_Credential["default"].destroy({
             where: {
               userid: ci
             }
@@ -226,7 +228,7 @@ function deleteCredential(req, res) {
 function updateCredential(req, res) {
   var ci, _req$body2, email, password, updateRowCount;
 
-  return regeneratorRuntime.async(function updateCredential$(_context5) {
+  return _regenerator["default"].async(function updateCredential$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
@@ -235,7 +237,7 @@ function updateCredential(req, res) {
 
           _context5.prev = 2;
           _context5.next = 5;
-          return regeneratorRuntime.awrap(_Credential["default"].update({
+          return _regenerator["default"].awrap(_Credential["default"].update({
             email: email,
             password: String(bcrypt.hashSync(password, 10))
           }, {

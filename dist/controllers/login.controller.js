@@ -1,15 +1,17 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.login = login;
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
 var _Credential = _interopRequireDefault(require("../models/Credential"));
 
 var _User = _interopRequireDefault(require("../models/User"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 require('../config/config');
 
@@ -20,13 +22,13 @@ var jwt = require('jsonwebtoken');
 function login(req, res) {
   var _req$body, email, password, emailFound, userFound, token;
 
-  return regeneratorRuntime.async(function login$(_context) {
+  return _regenerator["default"].async(function login$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _req$body = req.body, email = _req$body.email, password = _req$body.password;
           _context.next = 3;
-          return regeneratorRuntime.awrap(_Credential["default"].findOne({
+          return _regenerator["default"].awrap(_Credential["default"].findOne({
             where: {
               email: email
             }
@@ -47,7 +49,7 @@ function login(req, res) {
 
         case 6:
           _context.next = 8;
-          return regeneratorRuntime.awrap(bcrypt.compareSync(password, emailFound.password));
+          return _regenerator["default"].awrap(bcrypt.compareSync(password, emailFound.password));
 
         case 8:
           if (_context.sent) {
@@ -62,7 +64,7 @@ function login(req, res) {
 
         case 10:
           _context.next = 12;
-          return regeneratorRuntime.awrap(_User["default"].findOne({
+          return _regenerator["default"].awrap(_User["default"].findOne({
             // devolver el usuario o las credenciales ?
             where: {
               ci: emailFound.userid,

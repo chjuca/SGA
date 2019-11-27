@@ -1,13 +1,13 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.sequelize = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 require('../config/config');
 
@@ -22,6 +22,6 @@ var dbconfig = {
   },
   logging: false
 };
-var url = process.env.URL;
+var url = "postgres://postgres:admin@SGA:5432";
 var sequelize = new _sequelize["default"](url);
 exports.sequelize = sequelize;

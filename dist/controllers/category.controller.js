@@ -1,24 +1,26 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getCategories = getCategories;
 exports.createCategory = createCategory;
 
-var _Category = _interopRequireDefault(require("../models/Category"));
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var _Category = _interopRequireDefault(require("../models/Category"));
 
 function getCategories(req, res) {
   var categories;
-  return regeneratorRuntime.async(function getCategories$(_context) {
+  return _regenerator["default"].async(function getCategories$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
           _context.next = 3;
-          return regeneratorRuntime.awrap(_Category["default"].findAll({
+          return _regenerator["default"].awrap(_Category["default"].findAll({
             where: {
               categoryid: null
             }
@@ -51,14 +53,14 @@ function getCategories(req, res) {
 function createCategory(req, res) {
   var _req$body, name, description, categoryid, newCategory;
 
-  return regeneratorRuntime.async(function createCategory$(_context2) {
+  return _regenerator["default"].async(function createCategory$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _req$body = req.body, name = _req$body.name, description = _req$body.description, categoryid = _req$body.categoryid;
           _context2.prev = 1;
           _context2.next = 4;
-          return regeneratorRuntime.awrap(_Category["default"].create({
+          return _regenerator["default"].awrap(_Category["default"].create({
             name: name,
             description: description,
             categoryid: categoryid

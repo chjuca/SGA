@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -9,23 +11,23 @@ exports.getOneUser = getOneUser;
 exports.deleteUser = deleteUser;
 exports.updateUser = updateUser;
 
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
 var _User = _interopRequireDefault(require("../models/User"));
 
 var _Credential = _interopRequireDefault(require("../models/Credential"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var bcrypt = require('bcryptjs');
 
 function getUsers(req, res) {
   var users;
-  return regeneratorRuntime.async(function getUsers$(_context) {
+  return _regenerator["default"].async(function getUsers$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
           _context.next = 3;
-          return regeneratorRuntime.awrap(_User["default"].findAll({
+          return _regenerator["default"].awrap(_User["default"].findAll({
             where: {
               status: true
             }
@@ -58,14 +60,14 @@ function getUsers(req, res) {
 function createUser(req, res) {
   var _req$body, ci, name, lastname, dateofbirth, role, email, password, emailFound, newUser, newCredential;
 
-  return regeneratorRuntime.async(function createUser$(_context2) {
+  return _regenerator["default"].async(function createUser$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _req$body = req.body, ci = _req$body.ci, name = _req$body.name, lastname = _req$body.lastname, dateofbirth = _req$body.dateofbirth, role = _req$body.role, email = _req$body.email, password = _req$body.password;
           _context2.prev = 1;
           _context2.next = 4;
-          return regeneratorRuntime.awrap(_Credential["default"].findOne({
+          return _regenerator["default"].awrap(_Credential["default"].findOne({
             where: {
               email: email
             }
@@ -86,7 +88,7 @@ function createUser(req, res) {
 
         case 7:
           _context2.next = 9;
-          return regeneratorRuntime.awrap(_User["default"].create({
+          return _regenerator["default"].awrap(_User["default"].create({
             ci: ci,
             name: name,
             lastname: lastname,
@@ -99,7 +101,7 @@ function createUser(req, res) {
         case 9:
           newUser = _context2.sent;
           _context2.next = 12;
-          return regeneratorRuntime.awrap(_Credential["default"].create({
+          return _regenerator["default"].awrap(_Credential["default"].create({
             email: email,
             password: String(bcrypt.hashSync(password, 10)),
             // traer metodo desde controller o dejarlo aqui?
@@ -147,14 +149,14 @@ function createUser(req, res) {
 
 function getOneUser(req, res) {
   var ci, user;
-  return regeneratorRuntime.async(function getOneUser$(_context3) {
+  return _regenerator["default"].async(function getOneUser$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           ci = req.params.ci;
           _context3.prev = 1;
           _context3.next = 4;
-          return regeneratorRuntime.awrap(_User["default"].findOne({
+          return _regenerator["default"].awrap(_User["default"].findOne({
             where: {
               ci: ci,
               status: true
@@ -199,14 +201,14 @@ function getOneUser(req, res) {
 
 function deleteUser(req, res) {
   var ci, deleteRowCount;
-  return regeneratorRuntime.async(function deleteUser$(_context4) {
+  return _regenerator["default"].async(function deleteUser$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
           ci = req.params.ci;
           _context4.prev = 1;
           _context4.next = 4;
-          return regeneratorRuntime.awrap(_User["default"].update({
+          return _regenerator["default"].awrap(_User["default"].update({
             status: false
           }, {
             where: {
@@ -255,7 +257,7 @@ function deleteUser(req, res) {
 function updateUser(req, res) {
   var ci, _req$body2, name, lastname, dateofbirth, role, updateRowCount;
 
-  return regeneratorRuntime.async(function updateUser$(_context5) {
+  return _regenerator["default"].async(function updateUser$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
@@ -275,7 +277,7 @@ function updateUser(req, res) {
 
           _context5.prev = 2;
           _context5.next = 5;
-          return regeneratorRuntime.awrap(_User["default"].update({
+          return _regenerator["default"].awrap(_User["default"].update({
             name: name,
             lastname: lastname,
             dateofbirth: dateofbirth,
