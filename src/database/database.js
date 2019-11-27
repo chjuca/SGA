@@ -13,5 +13,5 @@ const dbconfig = {
     logging: true
 }; 
 
-const url = process.env.URL;
+const url = process.env.DATABASE_URL;
 export const sequelize = new Sequelize(url);
