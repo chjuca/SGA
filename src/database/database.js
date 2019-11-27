@@ -13,5 +13,5 @@ const dbconfig = {
     logging: false
 }; 
 
-const url = "postgres://postgres:admin@SGA:5432";
+const url = process.env.URL;
 export const sequelize = new Sequelize(url);

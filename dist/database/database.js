@@ -22,6 +22,6 @@ var dbconfig = {
   },
   logging: false
 };
-var url = "postgres://postgres:admin@SGA:5432";
+var url = process.env.URL;
 var sequelize = new _sequelize["default"](url);
 exports.sequelize = sequelize;
