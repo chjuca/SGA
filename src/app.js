@@ -1,3 +1,4 @@
+require('babel-polyfill')
 import express, {json} from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
