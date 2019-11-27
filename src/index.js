@@ -1,4 +1,4 @@
-require('./config/config');
+import 'babel-polyfill';
 import app from './app';
 
 function main(){
