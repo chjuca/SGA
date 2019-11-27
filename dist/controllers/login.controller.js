@@ -27,18 +27,19 @@ function login(req, res) {
       switch (_context.prev = _context.next) {
         case 0:
           _req$body = req.body, email = _req$body.email, password = _req$body.password;
-          _context.next = 3;
+          _context.prev = 1;
+          _context.next = 4;
           return _regenerator["default"].awrap(_Credential["default"].findOne({
             where: {
               email: email
             }
           }));
 
-        case 3:
+        case 4:
           emailFound = _context.sent;
 
           if (emailFound) {
-            _context.next = 6;
+            _context.next = 7;
             break;
           }
 
@@ -47,13 +48,13 @@ function login(req, res) {
             data: {}
           }));
 
-        case 6:
-          _context.next = 8;
+        case 7:
+          _context.next = 9;
           return _regenerator["default"].awrap(bcrypt.compareSync(password, emailFound.password));
 
-        case 8:
+        case 9:
           if (_context.sent) {
-            _context.next = 10;
+            _context.next = 11;
             break;
           }
 
@@ -62,8 +63,8 @@ function login(req, res) {
             data: {}
           }));
 
-        case 10:
-          _context.next = 12;
+        case 11:
+          _context.next = 13;
           return _regenerator["default"].awrap(_User["default"].findOne({
             // devolver el usuario o las credenciales ?
             where: {
@@ -72,11 +73,11 @@ function login(req, res) {
             }
           }));
 
-        case 12:
+        case 13:
           userFound = _context.sent;
 
           if (userFound) {
-            _context.next = 15;
+            _context.next = 16;
             break;
           }
 
@@ -85,7 +86,7 @@ function login(req, res) {
             data: {}
           }));
 
-        case 15:
+        case 16:
           token = jwt.sign({
             data: userFound
           }, process.env.SEED, {
@@ -96,13 +97,23 @@ function login(req, res) {
             data: userFound,
             token: token
           });
+          _context.next = 23;
+          break;
 
-        case 17:
+        case 20:
+          _context.prev = 20;
+          _context.t0 = _context["catch"](1);
+          res.status(500).json({
+            message: "Something goes wrong",
+            error: _context.t0
+          });
+
+        case 23:
         case "end":
           return _context.stop();
       }
     }
-  });
+  }, null, null, [[1, 20]]);
 }
 
 ;
