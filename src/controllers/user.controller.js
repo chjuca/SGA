@@ -1,4 +1,4 @@
-require('babel-polyfill')
+
 import User from '../models/User';
 const bcrypt = require('bcryptjs');
 import Credential from '../models/Credential';
