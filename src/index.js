@@ -1,6 +1,5 @@
-import app from './app';
 require('./config/config');
-
+import app from './app';
 
 function main(){
     app.listen(process.env.PORT);
