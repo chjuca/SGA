@@ -1,4 +1,10 @@
 //============
+//  ENTORNO
+//============
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
+
+//============
 //  PORT
 //============
 
@@ -7,7 +13,13 @@ process.env.PORT = process.env.PORT || 3000;
 //  DATA BASE
 //============
 
-process.env.DATABASE_URL= process.env.DATABASE_URL || "postgres://postgres:admin@127.0.0.1:5432/SGA"; //url
+//process.env.DATABASE_URL= process.env.DATABASE_URL || "postgres://postgres:admin@127.0.0.1:5432/SGA"; //url
+
+if(process.env.NODE_ENV==='dev'){
+    process.env.DATABASE_URL = "postgres://postgres:admin@127.0.0.1:5432/SGA";
+}else{
+    process.env.DATABASE_URL = process.env.DATABASE_URL
+}
 
 //============
 //  Duration Token
