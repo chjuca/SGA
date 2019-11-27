@@ -1,4 +1,4 @@
-import './app';
+require('./app');
 
 function main(){
     app.listen(process.env.PORT);
