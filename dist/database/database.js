@@ -22,6 +22,6 @@ var dbconfig = {
   },
   logging: true
 };
-var url = process.env.URL;
+var url = process.env.DATABASE_URL;
 var sequelize = new _sequelize["default"](url);
 exports.sequelize = sequelize;
