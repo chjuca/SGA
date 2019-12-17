@@ -5,7 +5,7 @@ import {checkToken,checkRole} from '../middleware/authentication';
 const router = Router();
 
 // /api/users/*
-router.post('/', checkToken , createUser);
+router.post('/', createUser);
 router.get('/', checkToken , getUsers);
 router.get('/:ci', checkToken , getOneUser);
 router.delete('/:ci', checkToken , deleteUser);         
