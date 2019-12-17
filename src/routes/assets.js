@@ -1,9 +1,11 @@
 import {Router} from 'express';
-import {createAssent, getAssents} from '../controllers/assets.controller';
+import {createAsset, getAssets, updateAsset ,deleteAssets} from '../controllers/assets.controller';
 
 const router = Router();
 
-router.post('/',createAssent);
-router.get('/',getAssents);
+router.post('/',createAsset);
+router.get('/',getAssets);
+router.put('/:publicId', updateAsset)
+router.delete('/:publicId', deleteAssets);
 
 export default router;

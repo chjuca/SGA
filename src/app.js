@@ -25,7 +25,18 @@ const storage = multer.diskStorage({
         cb(null, new Date().getTime() + path.extname(file.originalname));
     }
 })
-app.use(multer({storage}).single('image'));
+
+app.use(multer({storage,fileFilter: (req, file ,cb) => {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname));
+    if(mimetype && extname){
+        return cb(null, true);
+    }
+    cb('This Asset is not supported')
+}
+}).single('image'));
+ 
 
 //Routes
 app.use('/api/users', userRoutes);
