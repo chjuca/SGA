@@ -62,9 +62,12 @@ CREATE TABLE IF NOT EXISTS POSTS
     updatedAt TIMESTAMP with time zone DEFAULT now(),
     description VARCHAR,
     autorid VARCHAR(10) references USERS(ci),
-    html TEXT,
+    content TEXT,
     title VARCHAR,
-    categoryid integer references CATEGORY(id)
+    categoryid integer references CATEGORY(id),
+    isPublic BOOLEAN DEFAULT false,
+    isOnFacebook BOOLEAN DEFAULT false,
+    isOnInstagram BOOLEAN DEFAULT false
 );
 
 /*Publicaciones-keywords*/
@@ -80,7 +83,7 @@ VALUES ('1105587388','Richard', 'Arrobo', '1998-07-03', 2);
 
 
 INSERT INTO CREDENTIALS(EMAIL, PASSWORD, USERID)
-VALUES('krarrobo1@utpl.edu.ec', 'qwerty009', '1105587388');
+VALUES('krarrobo1@utpl.edu.ec', '$2a$10$EFFIT0nxB2JGi2BvZvAT2uSHq2YBohOsJu.HFgjpthdxYpJNaBDhG', '1105587388');
 
 /* Assets */
 CREATE TABLE IF NOT EXISTS ASSETS

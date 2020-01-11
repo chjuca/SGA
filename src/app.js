@@ -1,5 +1,6 @@
 const multer = require('multer');
 const path = require('path');
+const cors = require('cors')
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
@@ -14,6 +15,7 @@ import AssentsRoutes from './routes/assets';
 
 //initializations
 const app = express();
+app.use(cors());
 
 //middlewares
 app.use(morgan('dev'));

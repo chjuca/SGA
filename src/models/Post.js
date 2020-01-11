@@ -12,16 +12,25 @@ const Post = sequelize.define('posts',{
     autorid:{
         type: Sequelize.STRING(10)
     },
-    html:{
-        type: Sequelize.TEXT
+    content:{
+        type: Sequelize.TEXT            //content   configurar cors---> npm i cors
     },
     title:{
         type: Sequelize.STRING
     },
     categoryid:{
         type: Sequelize.INTEGER
+    },
+    ispublic:{
+        type: Sequelize.BOOLEAN
+    },
+    isonfacebook:{
+        type: Sequelize.BOOLEAN                     //BANDERAS QUE DEBIA AGREGAR
+    },
+    isoninstagram:{
+        type: Sequelize.BOOLEAN
     }
-    }, {
+ }, {
         timestamps: true,
         createdAt: 'createdat',
         updatedAt: 'updatedat',

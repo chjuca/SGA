@@ -88,8 +88,8 @@ export async function deleteAssets(req, res){
     }
 }
 
-
 export async function updateAsset(req, res){
+    
     const {publicId} = req.params;
 
     try {

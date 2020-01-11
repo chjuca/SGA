@@ -2,7 +2,7 @@ import Post from '../models/Post';
 
 export async function createPost (req, res) {
     
-    const {description, html, title, categoryid} = req.body;
+    const {description, content, title, categoryid, ispublic, isonfacebook, isoninstagram } = req.body;
     let user =  req.user;
 
 
@@ -10,12 +10,15 @@ export async function createPost (req, res) {
         let newPost = await Post.create({
             description,
             autorid : user.ci,
-            html,
+            content,
             title,
-            categoryid
+            categoryid,
+            ispublic,
+            isonfacebook,
+            isoninstagram
         },{
-            fields:['description','autorid','html','title','categoryid']
-        })
+            fields:['description','autorid','content','title','categoryid','ispublic','isonfacebook','isoninstagram']
+      })
         if(newPost){
             return res.json({
                 message: "Post created successfully",
@@ -48,14 +51,17 @@ export async function getPosts (req, res){
 export async function updatePost(req, res) {
 
     const {id} = req.params;
-    const {description, html, title, categoryid} = req.body;
+    const {description, content, title, categoryid, isPublic, isOnFacebook, isOnInstagram } = req.body;
 
     try {
         const updateRowCount = await Post.update({
             description,
-            html,
+            content,
             title,
-            categoryid
+            categoryid,
+            isPublic, 
+            isOnFacebook, 
+            isOnInstagram 
         },{
             where:{
                 id

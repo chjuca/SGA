@@ -5,9 +5,9 @@ import {checkToken,checkRole} from '../middleware/authentication';
 const router = Router();
 
 router.post('/', [checkToken, checkRole], createPost);
-router.get('/', getPosts);
-router.put('/:id', updatePost);
-router.delete('/:id', deletePost);
+router.get('/',[checkToken, checkRole], getPosts);
+router.put('/:id', [checkToken, checkRole],updatePost);
+router.delete('/:id',[checkToken, checkRole], deletePost);
 
 
 export default router;
