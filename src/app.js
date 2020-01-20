@@ -12,6 +12,7 @@ import loginRoutes from './routes/login';
 import categoryRoutes from './routes/category';
 import PostRoutes from './routes/posts';
 import AssentsRoutes from './routes/assets';
+import TitulationRoutes from './routes/titulations';
 
 //initializations
 const app = express();
@@ -46,6 +47,7 @@ app.use('/api/credentials', credentialRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/post', PostRoutes);
 app.use('/api/assent', AssentsRoutes);
+app.use('/api/titulation', TitulationRoutes);
 
 
 //Routes *** LOGIN ***

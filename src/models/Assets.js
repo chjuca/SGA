@@ -6,11 +6,12 @@ const Assets = sequelize.define('assets',{
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    imageurl:{
+    asseturl:{
         type: Sequelize.STRING
     },
     publicid:{
-        type : Sequelize.STRING
+        type : Sequelize.STRING,
+        unique: true
     },
     categoryid:{
         type: Sequelize.INTEGER
