@@ -19,6 +19,9 @@ const User = sequelize.define('users',{
     role:{
         type: Sequelize.INTEGER
     },
+    titulationid:{
+        type: Sequelize.INTEGER
+    },
     status:{
         type: Sequelize.BOOLEAN
     }

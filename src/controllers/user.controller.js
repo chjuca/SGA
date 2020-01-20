@@ -23,7 +23,7 @@ export async function getUsers(req, res) {
 
 export async function createUser(req, res) {
 
-    const { ci, name, lastname, dateofbirth, role, email, password } = req.body;
+    const { ci, name, lastname, dateofbirth, role, titulationid, email, password } = req.body;
     try {
 
         let emailFound = await Credential.findOne({
@@ -43,9 +43,10 @@ export async function createUser(req, res) {
             name,
             lastname,
             dateofbirth,
-            role
+            role,
+            titulationid
         }, {
-                fields: ['ci', 'name', 'lastname', 'dateofbirth', 'role']
+                fields: ['ci', 'name', 'lastname', 'dateofbirth', 'role','titulationid']
             })
 
         let newCredential = await Credential.create({
@@ -135,7 +136,7 @@ export async function deleteUser(req, res) {
 export async function updateUser(req, res) {
 
     const { ci } = req.params;
-    const { name, lastname, dateofbirth, role } = req.body                  //Que el usuario pueda modificar su email y su rol ?
+    const { name, lastname, dateofbirth, role, titulationid } = req.body                  //Que el usuario pueda modificar su email y su rol ?
 
     // const userFound = await User.findOne({
     //     atributes: ["name", "lastname", "dateofbirth", "role"],
@@ -154,7 +155,8 @@ export async function updateUser(req, res) {
             name,
             lastname,
             dateofbirth,
-            role
+            role,
+            titulationid
         }, {
                 where: {
                     ci,

@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS ASSETS
 -- 	primary key(category,id)
 -- );
 
--- INSERT INTO CATEGORYTEST(CATEGORY, ID ,NAME, description) 
+-- INSERT INTO CATEGORYTEST(CATEGORY, ID ,NAME, description) //Subir heroku
 -- VALUES 
 -- ('Role',1,'Estudiante', 'Estudiantes en general'),
 -- ('Role',2,'Docente', 'Docentes en general'),
