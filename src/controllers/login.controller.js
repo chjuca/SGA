@@ -46,8 +46,8 @@ export async function login(req, res) {
             }
         });      
 
-        userFound.dataValues.rolename = category.name;
-        userFound.dataValues.titulationname = titulationObject.name
+        userFound.role = category;
+        userFound.titulationid = titulationObject
 
         if(!userFound){
             return res.status(400).json({
