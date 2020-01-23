@@ -45,28 +45,12 @@ export async function login(req, res) {
             }]
         })
 
-
-        // Project.findAll({
-        //     include: [{
-        //         model: Task,
-        //         where: { state: Sequelize.col('project.state') }
-        //     }]
-        // })
-
-
-        // const category = await Category.findOne({
-        //     where:{
-        //         id: userFound.dataValues.role
-        //     }
-        // });      
-        // const titulationObject = await Titulation.findOne({
-        //     where:{
-        //         id: userFound.dataValues.titulationid
-        //     }
-        // });      
-
-        // userFound.role = category;
-        // userFound.titulationid = titulationObject
+        const userToken= await User.findOne({                     
+            where: {
+                ci: emailFound.userid,
+                status: true
+            }
+        });
 
         if(!userFound){
             return res.status(400).json({
@@ -76,7 +60,7 @@ export async function login(req, res) {
         }
 
         let token = jwt.sign({
-            data: userFound
+            data: userToken
         }, process.env.SEED, { expiresIn: process.env.TOKENEXPIRATION });
 
         res.json({

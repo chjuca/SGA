@@ -17,6 +17,7 @@ export let checkToken = (req, res, next) =>{
             })
         }
         req.user = decoded.data;
+        console.log(req.user);
         next();
 
     });
@@ -32,7 +33,7 @@ export let checkRole = (req, res, next) =>{
 
     let user =  req.user;
     console.log(user);
-    if(user.role == 4 ){              // Ahora solo es ADMIN
+    if(user.role === 4 ){              // Ahora solo es ADMIN
         next();
     }else{
         return res.status(400).json({
