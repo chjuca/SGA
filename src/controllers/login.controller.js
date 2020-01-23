@@ -3,8 +3,6 @@ import Credential from '../models/Credential';
 import User from '../models/User';
 import Category from '../models/Category';
 import Titulation from '../models/Titulation';
-import {sequelize} from '../database/database';
-import Sequelize from 'sequelize';
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 

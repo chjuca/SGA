@@ -32,7 +32,7 @@ export let checkRole = (req, res, next) =>{
 
     let user =  req.user;
     console.log(user);
-    if(user.role === 4 ){              // Ahora solo es ADMIN
+    if(user.role == 4 ){              // Ahora solo es ADMIN
         next();
     }else{
         return res.status(400).json({
