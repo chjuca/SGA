@@ -3,6 +3,8 @@ import Credential from '../models/Credential';
 import User from '../models/User';
 import Category from '../models/Category';
 import Titulation from '../models/Titulation';
+import {sequelize} from '../database/database';
+import Sequelize from 'sequelize';
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -32,22 +34,41 @@ export async function login(req, res) {
             where: {
                 ci: emailFound.userid,
                 status: true
-            }
+            },
+            attributes:['ci', 'name', 'lastname', 'dateofbirth', 'status']
+            ,
+            include: [{
+                model: Category,
+                as: 'rol',
+                attributes:['id', 'name']
+            },{
+               model: Titulation,
+               attributes:['id', 'name'] 
+            }]
         })
 
-        const category = await Category.findOne({
-            where:{
-                id: userFound.dataValues.role
-            }
-        });      
-        const titulationObject = await Titulation.findOne({
-            where:{
-                id: userFound.dataValues.titulationid
-            }
-        });      
 
-        userFound.role = category;
-        userFound.titulationid = titulationObject
+        // Project.findAll({
+        //     include: [{
+        //         model: Task,
+        //         where: { state: Sequelize.col('project.state') }
+        //     }]
+        // })
+
+
+        // const category = await Category.findOne({
+        //     where:{
+        //         id: userFound.dataValues.role
+        //     }
+        // });      
+        // const titulationObject = await Titulation.findOne({
+        //     where:{
+        //         id: userFound.dataValues.titulationid
+        //     }
+        // });      
+
+        // userFound.role = category;
+        // userFound.titulationid = titulationObject
 
         if(!userFound){
             return res.status(400).json({

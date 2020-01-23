@@ -1,5 +1,7 @@
 import Sequelize from 'sequelize';
 import User from '../models/User';
+import Category from '../models/Category';
+import Titulation from '../models/Titulation';
 const bcrypt = require('bcryptjs');
 import Credential from '../models/Credential';
 
@@ -8,7 +10,17 @@ export async function getUsers(req, res) {
         const users = await User.findAll({
             where:{
                 status: true
-            }
+            },
+            attributes:['ci', 'name', 'lastname', 'dateofbirth', 'status']
+            ,
+            include: [{
+                model: Category,
+                as: 'rol',
+                attributes:['id', 'name']
+            },{
+               model: Titulation,
+               attributes:['id', 'name'] 
+            }]
         });
         res.json({
             data: users

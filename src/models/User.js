@@ -1,5 +1,7 @@
 import Sequelize from 'sequelize';
 import {sequelize} from '../database/database';
+import Category from './Category';
+import Titulation from './Titulation';
 
 const User = sequelize.define('users',{
     ci:{
@@ -28,6 +30,13 @@ const User = sequelize.define('users',{
 },{
     timestamps: false
 })
+
+User.hasOne(Category,{as: 'rol', foreignKey: 'id', sourceKey: 'role'});
+Category.belongsTo(User, {foreignKey: 'id', sourceKey: 'role'});
+
+User.hasOne(Titulation,{foreignKey: 'id', sourceKey: 'titulationid'});
+Titulation.belongsTo(User, {foreignKey: 'id', sourceKey: 'titulationid'});
+
 User.removeAttribute('id');  // linea agregada para evitar error en el findOne() 
 
 export default User;
