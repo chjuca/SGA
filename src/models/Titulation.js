@@ -19,9 +19,6 @@ const Titulation = sequelize.define('titulation',{
 }, {
     timestamps: false,
     freezeTableName: true,
-
-    // define the table's name
-    //tableName: 'category'
 });
 
 export default Titulation;

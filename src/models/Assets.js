@@ -6,19 +6,22 @@ const Assets = sequelize.define('assets',{
         type: Sequelize.INTEGER,
         primaryKey: true
     },
+    title:{
+        type: Sequelize.STRING
+    },
     asseturl:{
         type: Sequelize.STRING
     },
     publicid:{
-        type : Sequelize.STRING,
+        type : Sequelize.STRING,                    
         unique: true
     },
     categoryid:{
         type: Sequelize.INTEGER
+    },
+    userid:{
+        type: Sequelize.STRING(10)
     }
-    // postId:{
-    //     type : Sequelize.INTEGER                // Se agrega esta fk ?
-    // }
 },{
     timestamps: false
 });

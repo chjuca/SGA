@@ -12,6 +12,7 @@ import loginRoutes from './routes/login';
 import categoryRoutes from './routes/category';
 import PostRoutes from './routes/posts';
 import AssentsRoutes from './routes/assets';
+import PostHasKeywordsRoutes from './routes/posthaskeywords';
 import TitulationRoutes from './routes/titulations';
 
 //initializations
@@ -48,6 +49,7 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/post', PostRoutes);
 app.use('/api/assent', AssentsRoutes);
 app.use('/api/titulation', TitulationRoutes);
+app.use('/api/posthaskeywords', PostHasKeywordsRoutes);
 
 
 //Routes *** LOGIN ***

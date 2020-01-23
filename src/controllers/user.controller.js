@@ -1,4 +1,4 @@
-
+import Sequelize from 'sequelize';
 import User from '../models/User';
 const bcrypt = require('bcryptjs');
 import Credential from '../models/Credential';
@@ -175,6 +175,24 @@ export async function updateUser(req, res) {
         })
 
     } catch (error) {
+        res.status(500).json({
+            message: 'Something goes wrong',
+            data: error
+        })
+    }
+}
+
+export async function countUsers(req, res){
+
+    try{
+        const userCount = await User.findAll({
+            attributes: [[Sequelize.fn('COUNT', Sequelize.col('ci')), 'count']]
+          });
+          return res.json({
+            userCount
+        })
+    }catch(error){
+        console.log(error);
         res.status(500).json({
             message: 'Something goes wrong',
             data: error

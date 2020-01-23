@@ -19,14 +19,32 @@ export async function getCategories(req, res){
     }
 }
 
-export async function getCategoriesbyId(req, res){
-
-    const {id} = req.params;
+export async function getKeywords(req, res){
 
     try {
         const categories = await Category.findAll({
             where:{
-                categoryid: id
+                categoryid: 6
+            }
+        });
+        res.json({
+            data: categories
+        })        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Something goes wrong",
+            error  
+        })
+    }
+}
+
+export async function getRoles(req, res){
+
+    try {
+        const categories = await Category.findAll({
+            where:{
+                categoryid: 1
             }
         });
         res.json({

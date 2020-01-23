@@ -13,7 +13,7 @@ const Post = sequelize.define('posts',{
         type: Sequelize.STRING(10)
     },
     content:{
-        type: Sequelize.TEXT            //content   configurar cors---> npm i cors
+        type: Sequelize.TEXT            
     },
     title:{
         type: Sequelize.STRING
@@ -22,12 +22,6 @@ const Post = sequelize.define('posts',{
         type: Sequelize.INTEGER
     },
     ispublic:{
-        type: Sequelize.BOOLEAN
-    },
-    isonfacebook:{
-        type: Sequelize.BOOLEAN                     //BANDERAS QUE DEBIA AGREGAR
-    },
-    isoninstagram:{
         type: Sequelize.BOOLEAN
     }
  }, {

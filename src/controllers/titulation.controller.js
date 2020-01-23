@@ -1,4 +1,5 @@
 import Titulation from '../models/Titulation'
+const { Op } = require("sequelize");
 
 export async function getAreas(req, res){
 
@@ -19,19 +20,20 @@ export async function getAreas(req, res){
     }
 }
 
-export async function getTitulationsbyArea(req, res){
+export async function getAreasAndTitulation(req, res){
 
-    const {id} = req.params;
-
-    try {
+    try { 
         const titulations = await Titulation.findAll({
             where:{
-                areaid: id
+                areaid:{
+                    [Op.ne]: null
+                }
             }
         });
-        res.json({
-            data: titulations
-        })        
+        return res.json({
+           titulations  
+        });
+        
     } catch (error) {
         console.log(error);
         res.status(500).json({

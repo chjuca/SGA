@@ -1,3 +1,4 @@
+import Sequelize from 'sequelize';
 import Post from '../models/Post';
 
 export async function createPost (req, res) {
@@ -111,4 +112,22 @@ export async function deletePost(req, res){
         })
     }
 
+}
+
+export async function countPost(req, res){
+
+    try{
+        const PostCount = await Post.findAll({
+            attributes: [[Sequelize.fn('COUNT', Sequelize.col('id')), 'count']]
+          });
+          return res.json({
+            PostCount
+        })
+    }catch(error){
+        console.log(error);
+        res.status(500).json({
+            message: 'Something goes wrong',
+            data: error
+        })
+    }
 }

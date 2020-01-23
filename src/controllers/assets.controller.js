@@ -11,8 +11,8 @@ cloudinary.config({
 
 export async function createAsset(req, res) {
 
-    const { categoryid, asseturl } = req.body;
-    let url = asseturl.split("=");
+    const { title, categoryid, asseturl } = req.body;
+    let userid =  req.user.ci;
 
     if (!asseturl) {
         try {
@@ -21,10 +21,12 @@ export async function createAsset(req, res) {
             let uploadedAsset = await Assets.create({
                 asseturl: result.url,
                 publicid: result.public_id,
-                categoryid
+                categoryid,
+                title,
+                userid
 
             }, {
-                    fields: ['asseturl', 'publicid', 'categoryid']
+                    fields: ['asseturl', 'publicid', 'categoryid','title','userid']
                 });
             await fs.unlink(req.file.path);             //Borrar el Archivo
 
@@ -42,14 +44,17 @@ export async function createAsset(req, res) {
             })
         }
     } else {
+        let url = asseturl.split("=");
         if (url[1]) {
             try {
                 let uploadedAsset = await Assets.create({
                     asseturl,
                     publicid: url[1],
-                    categoryid
+                    categoryid,
+                    userid,
+                    title
                 }, {
-                        fields: ['asseturl', 'publicid', 'categoryid']
+                        fields: ['asseturl', 'publicid', 'categoryid', 'userid', 'title']
                     });
                 if (uploadedAsset) {
                     return res.json({
@@ -70,20 +75,24 @@ export async function createAsset(req, res) {
                 error: {}
             })
         }
-
-
-
-
     }
 }
 
 export async function getAssets(req, res) {
+
+    let userid =  req.user.ci;
+
     try {
-        const assets = await Assets.findAll();
+        const assets = await Assets.findAll({
+            where:{
+                userid
+            }
+        });
         res.json({
             data: assets
         })
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             message: "Something goes wrong",
             error

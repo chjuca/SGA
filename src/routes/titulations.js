@@ -1,10 +1,9 @@
 import {Router} from 'express';
-import { getTitulationsbyArea, getAreas, createAreaOrTitulation } from "../controllers/titulation.controller";
+import { getAreasAndTitulation, createAreaOrTitulation } from "../controllers/titulation.controller";
 
 const router = Router();
 
-router.get('/', getAreas);
-router.get('/:id', getTitulationsbyArea);
+router.get('/', getAreasAndTitulation);
 router.post('/', createAreaOrTitulation);
 
 
