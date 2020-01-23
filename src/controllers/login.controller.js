@@ -1,6 +1,8 @@
 require('../config/config');
 import Credential from '../models/Credential';
 import User from '../models/User';
+import Category from '../models/Category';
+import Titulation from '../models/Titulation';
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -33,6 +35,20 @@ export async function login(req, res) {
             }
         })
 
+        const category = await Category.findOne({
+            where:{
+                id: userFound.dataValues.role
+            }
+        });      
+        const titulationObject = await Titulation.findOne({
+            where:{
+                id: userFound.dataValues.titulationid
+            }
+        });      
+
+        userFound.dataValues.rolename = category.name;
+        userFound.dataValues.titulationname = titulationObject.name
+
         if(!userFound){
             return res.status(400).json({
                 message: "The User does not exist",
@@ -50,6 +66,7 @@ export async function login(req, res) {
             token
         })
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             message: "Something goes wrong",
             error
