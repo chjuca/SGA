@@ -21,4 +21,7 @@ const Titulation = sequelize.define('titulation',{
     freezeTableName: true,
 });
 
+Titulation.hasMany(Titulation,{as: 'titulaciones',foreignKey: 'id',sourcekey : 'areaid'});
+Titulation.belongsTo(Titulation,{foreignKey: 'id',sourcekey : 'areaid'});
+
 export default Titulation;

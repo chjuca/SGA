@@ -4,8 +4,8 @@ import {getPostsbyKeyword, getKeywordsbyPost, createAssociations, updateAssociat
 const router = Router();
 
 router.post('/', createAssociations);
-router.get('/keyword/:keywordid', getPostsbyKeyword);
-router.get('/post/:postid', getKeywordsbyPost);
+router.get('/post/:keywordid', getPostsbyKeyword);
+router.get('/keyword/:postid', getKeywordsbyPost);
 router.delete('/:id', deleteAssociations);
 router.put('/:id', updateAssociations);
 

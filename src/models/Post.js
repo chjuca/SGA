@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
 import {sequelize} from '../database/database';
+import Category from '../models/Category';
 
 const Post = sequelize.define('posts',{
     id:{
@@ -30,5 +31,8 @@ const Post = sequelize.define('posts',{
         updatedAt: 'updatedat',
         underscored : true
 });
+Post.hasMany(Category,{as: 'category',foreignKey: 'id',sourcekey : 'categoryid'});
+Category.belongsTo(Post,{foreignKey: 'id',sourcekey : 'categoryid'});
+
 
 export default Post;

@@ -1,4 +1,6 @@
 import PostHasKeywords from '../models/PostHasKeywords';
+import Post from '../models/Post';
+import Category from '../models/Category';
 
 export async function getPostsbyKeyword(req, res){
 
@@ -8,7 +10,10 @@ export async function getPostsbyKeyword(req, res){
         const associations = await PostHasKeywords.findAll({
             where:{
             keywordid
-            }
+            },
+            include: [{
+                model: Post
+            }]
         });
         res.json({
             data: associations
@@ -29,8 +34,11 @@ export async function getKeywordsbyPost(req, res){
     try {
         const associations = await PostHasKeywords.findAll({
             where:{
-                postid
-            }
+                id: postid
+            },
+            include: [{
+                model: Category
+            }]
         });
         res.json({
             data: associations

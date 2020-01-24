@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
 import Post from '../models/Post';
+import Category from '../models/Category';
 
 export async function createPost (req, res) {
     
@@ -35,7 +36,14 @@ export async function createPost (req, res) {
 
 export async function getPosts (req, res){
     try {
-        const posts = await Post.findAll();
+        const posts = await Post.findAll({
+            attributes:['id', 'description','autorid','content','title', 'ispublic', 'createdat','updatedat'],
+            include: [{
+                model: Category,
+                as: 'category',
+                attributes:['id','name']
+            }]
+        });
         res.json({
             data: posts
         })

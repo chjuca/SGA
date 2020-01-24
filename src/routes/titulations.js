@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { getAreasAndTitulation, createAreaOrTitulation } from "../controllers/titulation.controller";
+import { getAreasAndTitulation, createAreaOrTitulation, getAreas } from "../controllers/titulation.controller";
 
 const router = Router();
 
