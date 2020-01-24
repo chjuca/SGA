@@ -38,7 +38,7 @@ export async function createUser(req, res) {
     const { ci, name, lastname, dateofbirth, role, titulationid, email, password } = req.body;
     try {
 
-        let emailFound = await Credential.findOne({
+       let emailFound = await Credential.findOne({
             where: {
                 email
             }
@@ -72,7 +72,7 @@ export async function createUser(req, res) {
         if (newUser) {
             return res.json({
                 message: "User created successfully",
-                data: { newUser, newCredential }
+                data: newUser
             })
         }
 
