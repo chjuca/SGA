@@ -1,6 +1,5 @@
-import Titulation from '../models/Titulation'
-import Sequelize from 'sequelize';
-const { Op } = require("sequelize");
+import Titulation from '../models/Titulation';
+import Area from '../models/Area';
 
 export async function getAreas(req, res){
 
@@ -24,21 +23,14 @@ export async function getAreas(req, res){
 export async function getAreasAndTitulation(req, res){
 
     try { 
-        const area = await Titulation.findAll({
-            // where:{
-            //     areaid: null
-                
-            // },
-            // include: [{
-            //     model: Titulation,
-            //     as: 'titulaciones',
-            //     where:{
-            //         areaid: Sequelize.col('titulation.id')
-            //     }
-            // }]
+        const data = await Area.findAll({
+            include: [{
+                model: Titulation,
+                as: 'titulaciones'
+            }]
         });
         return res.json({
-           area
+           data
         });
         
     } catch (error) {

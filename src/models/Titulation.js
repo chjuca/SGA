@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
 import {sequelize} from '../database/database';
+import Area from '../models/Area';
 
 const Titulation = sequelize.define('titulation',{
     id:{
@@ -21,7 +22,7 @@ const Titulation = sequelize.define('titulation',{
     freezeTableName: true,
 });
 
-Titulation.hasMany(Titulation,{as: 'titulaciones',foreignKey: 'id',sourcekey : 'areaid'});
-Titulation.belongsTo(Titulation,{foreignKey: 'id',sourcekey : 'areaid'});
+Area.hasMany(Titulation,{as: 'titulaciones', foreignKey:'areaid', sourceKey : 'id'});
+Titulation.belongsTo(Area,{ foreignKey:'areaid', sourceKey : 'id'});
 
 export default Titulation;
