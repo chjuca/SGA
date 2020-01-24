@@ -31,8 +31,8 @@ const Post = sequelize.define('posts',{
         updatedAt: 'updatedat',
         underscored : true
 });
-Post.hasMany(Category,{as: 'category',foreignKey: 'id',sourcekey : 'categoryid'});
-Category.belongsTo(Post,{foreignKey: 'id',sourcekey : 'categoryid'});
+Post.hasOne(Category,{as: 'category',foreignKey: 'id', sourceKey : 'categoryid'});
+Category.belongsTo(Post,{foreignKey: 'categoryid', sourceKey : 'id'});
 
 
 export default Post;

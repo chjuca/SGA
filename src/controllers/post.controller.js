@@ -39,10 +39,10 @@ export async function getPosts (req, res){
         const posts = await Post.findAll({
             attributes:['id', 'description','autorid','content','title', 'ispublic', 'createdat','updatedat'],
             include: [{
-                model: Category,
-                as: 'category',
-                attributes:['id','name']
-            }]
+                 model: Category,
+                 as: 'category',
+                 attributes:['id','name']
+             }]
         });
         res.json({
             data: posts
