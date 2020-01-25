@@ -55,6 +55,32 @@ export async function getPosts (req, res){
     }
 }
 
+export async function getPostsbyKeyword(req, res){
+
+    const {keywordid} = req.params;
+
+    try {
+        const posts = await Post.findAll({
+            where:{
+            categoryid: keywordid
+            },
+            include: [{
+                model: Category,
+                as: 'keyword'
+            }]
+        });
+        res.json({
+            data: posts
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Something goes wrong",
+            error
+        })
+    }
+}
+
 export async function updatePost(req, res) {
 
     const {id} = req.params;

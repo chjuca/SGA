@@ -21,6 +21,11 @@ VALUES
 ('Investigacion', 'palabra clave', 6),
 ('Innovación', 'palabra clave', 6);
 
+('Cafecientifico', 'palabra clave', 6),
+('Debates', 'palabra clave',6),
+('Talleres', 'palabra clave', 6),
+('Vitaminai', 'palabra clave', 6);
+
 
 /*Usuarios*/
 CREATE TABLE IF NOT EXISTS USERS

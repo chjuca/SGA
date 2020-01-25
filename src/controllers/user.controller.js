@@ -92,7 +92,7 @@ export async function createUser(req, res) {
                 from: "'Ascendere' <ascenderetest@gmail.com>",
                 to: email,
                 subject: 'Reseteo de Contraseña',
-                text: 'Holi Desde el backend'
+                text: 'Funciona :D'
             })
 
             console.log('Mensaje Enviado', info.messageId);
