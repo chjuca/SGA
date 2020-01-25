@@ -33,3 +33,10 @@ process.env.TOKENEXPIRATION = 60 * 60 * 24 * 30
 //============
 
 process.env.SEED = 'SGA-key'
+
+//============
+//  USER AND PASS EMAIL
+//============
+
+process.env.USER = 'ascenderetest@gmail.com';
+process.env.PASS = 'gt7nvHmU';

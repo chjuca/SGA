@@ -2,8 +2,9 @@ import Sequelize from 'sequelize';
 import User from '../models/User';
 import Category from '../models/Category';
 import Titulation from '../models/Titulation';
-const bcrypt = require('bcryptjs');
 import Credential from '../models/Credential';
+const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
 
 export async function getUsers(req, res) {
     try {
@@ -59,7 +60,7 @@ export async function createUser(req, res) {
             titulationid
         }, {
                 fields: ['ci', 'name', 'lastname', 'dateofbirth', 'role','titulationid']
-            })
+            });
 
         let newCredential = await Credential.create({
             email,
@@ -69,7 +70,33 @@ export async function createUser(req, res) {
                 fields: ['email', 'password', 'userid']
             });
 
+            let contentHTML = `
+            <h1>USER  INFROMATION</h1>
+            <ul>
+                <li>Cedula: ${ci}</li>
+            </ul>
+            <p>FUNCIONA :D</p>
+        `;
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth:{
+                user: process.env.USER,
+                pass: process.env.PASS
+            }
+        });
+
         if (newUser) {
+
+            const info = await transporter.sendMail({
+                from: "'Ascendere' <ascenderetest@gmail.com>",
+                to: email,
+                subject: 'Reseteo de Contraseña',
+                text: 'Holi Desde el backend'
+            })
+
+            console.log('Mensaje Enviado', info.messageId);
+
             return res.json({
                 message: "User created successfully",
                 data: newUser

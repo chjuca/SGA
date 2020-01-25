@@ -5,10 +5,8 @@ const Credential = sequelize.define("credentials", {
     email : {
         type: Sequelize.STRING,
         validate:{
-            isEmail: true,
-            unique: true
-        },
-      
+            isEmail: true
+        }
     },
     password:{
         type: Sequelize.STRING

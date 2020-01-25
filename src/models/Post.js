@@ -31,7 +31,7 @@ const Post = sequelize.define('posts',{
         updatedAt: 'updatedat',
         underscored : true
 });
-Post.hasOne(Category,{as: 'category',foreignKey: 'id', sourceKey : 'categoryid'});
+Post.hasOne(Category,{as: 'keyword',foreignKey: 'id', sourceKey : 'categoryid'});
 Category.belongsTo(Post,{foreignKey: 'categoryid', sourceKey : 'id'});
 
 
