@@ -40,7 +40,7 @@ export async function getPosts (req, res){
             attributes:['id', 'description','autorid','content','title', 'ispublic', 'createdat','updatedat'],
             include: [{
                  model: Category,
-                 as: 'category',
+                 as: 'keyword',
                  attributes:['id','name']
              }]
         });
@@ -48,6 +48,7 @@ export async function getPosts (req, res){
             data: posts
         })
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             message: "Something goes wrong",
             error
