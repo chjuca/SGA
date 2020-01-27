@@ -131,7 +131,7 @@ export async function getUserbyCI(req, res) {
                 attributes:['id', 'name']
             },{
                model: Titulation,
-               attributes:['id', 'name'] 
+               attributes:['id', 'name', 'areaid'] 
             }]
         });
         if (!user) {
@@ -185,7 +185,7 @@ export async function deleteUser(req, res) {
 export async function updateUser(req, res) {
 
     const { ci } = req.params;
-    const { name, lastname, dateofbirth, role, titulationid } = req.body                  //Que el usuario pueda modificar su email y su rol ?
+    const { name, lastname, dateofbirth, titulationid } = req.body                  //Que el usuario pueda modificar su email y su rol ?
 
     // const userFound = await User.findOne({
     //     atributes: ["name", "lastname", "dateofbirth", "role"],
@@ -204,7 +204,6 @@ export async function updateUser(req, res) {
             name,
             lastname,
             dateofbirth,
-            role,
             titulationid
         }, {
                 where: {
