@@ -113,7 +113,7 @@ export async function createUser(req, res) {
     }
 }
 
-export async function getOneUser(req, res) {
+export async function getUserbyCI(req, res) {
 
     const { ci } = req.params;
 
@@ -122,7 +122,17 @@ export async function getOneUser(req, res) {
             where: {
                 ci , 
                 status: true
-            }
+            },
+            attributes:['ci', 'name', 'lastname', 'dateofbirth', 'status']
+            ,
+            include: [{
+                model: Category,
+                as: 'rol',
+                attributes:['id', 'name']
+            },{
+               model: Titulation,
+               attributes:['id', 'name'] 
+            }]
         });
         if (!user) {
             return res.status(400).json({

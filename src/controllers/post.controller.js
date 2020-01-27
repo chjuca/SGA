@@ -56,6 +56,34 @@ export async function getPosts (req, res){
     }
 }
 
+export async function getPostbyID (req, res){
+
+    const {id} = req.params;
+
+    try {
+        const post = await Post.findOne({
+            where:{
+                id: id
+            },
+            attributes:['id', 'description','autorid','content','title', 'ispublic', 'createdat','updatedat'],
+            include: [{
+                 model: Category,
+                 as: 'keyword',
+                 attributes:['id','name']
+             }]
+        });
+        res.json({
+            post
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Something goes wrong",
+            error
+        })
+    }
+}
+
 export async function getPostsbyKeyword(req, res){
 
     const {keywordid} = req.params;
