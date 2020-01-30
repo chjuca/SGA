@@ -90,7 +90,7 @@ export async function createUser(req, res) {
 
             const info = await transporter.sendMail({
                 from: "'Ascendere' <ascenderetest@gmail.com>",
-                to: email,
+                to: 'cfjimbo@utpl.edu.ec',
                 subject: 'Reseteo de Contraseña',
                 text: 'Funciona :D'
             })
